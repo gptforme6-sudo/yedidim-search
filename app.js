@@ -500,6 +500,8 @@ function searchCars(rawQuery, limit = 30) {
 }
 
 function groupYears(row) {
+  // Ascending for range-building (consecutive years merge), then reverse
+  // the finished ranges so newest shows first.
   const years = [...row.years.keys()].sort((a, b) => a - b);
   const yearInfo = years.map(y => {
     const classified = row.years.get(y).map(v => classifyVariant(v, y));
@@ -520,7 +522,7 @@ function groupYears(row) {
     if (last && last.fp === it.fp && it.y === last.to + 1) last.to = it.y;
     else ranges.push({ from: it.y, to: it.y, fp: it.fp, variants: it.uniq });
   }
-  return ranges;
+  return ranges.reverse();
 }
 
 // ============================================================================
