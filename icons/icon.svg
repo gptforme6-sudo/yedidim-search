@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-label="ידידים">
+  <!-- App mark in the spirit of the Yedidim logo:
+       four rounded shapes meeting at the centre to suggest hands joining.
+       Colours sampled from the official logo (pink, yellow, teal, blue). -->
+  <rect x="0" y="0" width="512" height="512" rx="104" fill="#ffffff"/>
+  <g transform="translate(256 256)">
+    <!-- top-left: magenta -->
+    <path d="M -170 -170 L -40 -170 Q -20 -170 -20 -150 L -20 -70 Q -20 -50 -40 -50
+             L -70 -50 Q -70 -20 -90 -20 L -150 -20 Q -170 -20 -170 -40 Z"
+          fill="#dd3b7f" transform="translate(-10 -10)"/>
+    <!-- top-right: amber -->
+    <path d="M 170 -170 L 40 -170 Q 20 -170 20 -150 L 20 -70 Q 20 -50 40 -50
+             L 70 -50 Q 70 -20 90 -20 L 150 -20 Q 170 -20 170 -40 Z"
+          fill="#f6c836" transform="translate(10 -10)"/>
+    <!-- bottom-left: teal -->
+    <path d="M -170 170 L -40 170 Q -20 170 -20 150 L -20 70 Q -20 50 -40 50
+             L -70 50 Q -70 20 -90 20 L -150 20 Q -170 20 -170 40 Z"
+          fill="#1fb9a4" transform="translate(-10 10)"/>
+    <!-- bottom-right: indigo -->
+    <path d="M 170 170 L 40 170 Q 20 170 20 150 L 20 70 Q 20 50 40 50
+             L 70 50 Q 70 20 90 20 L 150 20 Q 170 20 170 40 Z"
+          fill="#4b55a8" transform="translate(10 10)"/>
+  </g>
+</svg>
