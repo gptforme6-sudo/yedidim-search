@@ -540,6 +540,10 @@ qBox.addEventListener("keydown", onKey);
 document.addEventListener("click", (e) => {
   if (!e.target.closest(".searchbox") && !e.target.closest(".suggest")) sugg.innerHTML = "";
 });
+// Scrolling the suggestion list on a touch device should dismiss the on-screen
+// keyboard so the user can see the list, without clearing what they typed.
+sugg.addEventListener("touchmove", () => { if (document.activeElement === qBox) qBox.blur(); }, { passive: true });
+sugg.addEventListener("scroll",   () => { if (document.activeElement === qBox) qBox.blur(); }, { passive: true });
 
 function onInput() {
   if (!DATA_READY) return;
@@ -593,8 +597,10 @@ function renderSuggest(query) {
 function pick(row) {
   if (!row) return;
   sugg.innerHTML = "";
-  qBox.value = row.display.replace(/\s·\s.*$/, "").trim();
+  // Keep whatever the user typed in the search box — don't overwrite it with
+  // the picked row's name.
   selectedIdx = -1;
+  qBox.blur();
   renderResult(row);
 }
 
@@ -712,10 +718,13 @@ async function plateLookup() {
 // ============================================================================
 const themeBtn = $("theme");
 themeBtn.addEventListener("click", () => {
-  const cur = document.documentElement.getAttribute("data-theme");
-  const next = cur === "dark" ? "light" : (cur === "light" ? "" : "dark");
-  if (next) document.documentElement.setAttribute("data-theme", next);
-  else document.documentElement.removeAttribute("data-theme");
+  // Flip from the EFFECTIVE theme (what the user sees), not from the attribute
+  // alone: without this, the first click can be a no-op when the attribute is
+  // empty but the OS theme already matches what we'd switch to.
+  const attr = document.documentElement.getAttribute("data-theme");
+  const effective = attr || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  const next = effective === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
   try { localStorage.setItem("theme", next); } catch (_) {}
 });
 try {

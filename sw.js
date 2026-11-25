@@ -1,5 +1,5 @@
 // Simple offline-first service worker for the Yedidim cables app.
-const CACHE = "yedidim-cables-v4";
+const CACHE = "yedidim-cables-v5";
 const PRECACHE = [
   "./",
   "./index.html",
